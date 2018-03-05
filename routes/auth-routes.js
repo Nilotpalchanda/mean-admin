@@ -26,8 +26,9 @@ router.get('/instagram', passport.authenticate('instagram'));
 
 
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    res.send('you reach the callback URI')
-    //res.redirect('/profile/')
+    //res.send('you reach the callback URI')
+    res.render('admin/dash',{user:req.user})
+
 })
 
 router.get('/github/callback', passport.authenticate('github'), (req, res) => {

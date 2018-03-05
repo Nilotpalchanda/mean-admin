@@ -7,6 +7,8 @@ const passport = require('passport')
 const cookieSession = require('cookie-session')
 const keys = require ('./config/keys')
 const authRoutes = require('./routes/auth-routes')
+const dashboardRoutes = require('./routes/dashboard-routes')
+// const profileRoutes = require('./routes/profile-routes')
 const passportSetup = require('./config/passport-setup')
 const port = process.env.PORT || 3000
 
@@ -49,7 +51,14 @@ app.get('/admin', (req, res) => {
 
     res.render('admin/login')
 })
+// app.get('/dash', (req, res) => {
 
+//     res.render('admin/dash',{user:req.user})
+// })
+app.get('/profile', (req, res) => {
+
+    res.render('admin/profile',{user:req.user})
+})
 //
 
 app.get('/logout', (req, res) => {
@@ -57,4 +66,28 @@ app.get('/logout', (req, res) => {
    req.logout()
    res.redirect('/')
 })
+
+const authCheck = (req,res,next)=>{
+  if(!req.user){
+    // if user not login then redirect basrd on user details (req.user)
+    res.render('admin/login')
+  }else{
+    // if login go to progile page
+    next()
+  }
+}
+
+
+app.get('/dash',authCheck,(req,res)=>{
+  res.render('admin/dash',{user:req.user})
+  //res.send('user name is :' + req.user.username)
+})
+
+// app.get('/add-post',(req,res)=>{
+//   res.render('admin/addpost')
+// })
+
 app.use('/auth', authRoutes)
+// app.use('/dash',profileRoutes)
+
+app.use('/dash',dashboardRoutes)
