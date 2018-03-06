@@ -35,7 +35,7 @@ passport.use(new GoogleStrategy({
 }, (accessToken, refreshToken, profile, done) => {
     //passport callback function
     // console.log('callback function fiered--')
-    console.log(profile);
+    //console.log(profile);
     
     User.findOne({ googleId: profile.id }).then((currentUser) => {
 

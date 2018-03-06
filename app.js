@@ -10,12 +10,16 @@ const authRoutes = require('./routes/auth-routes')
 const dashboardRoutes = require('./routes/dashboard-routes')
 // const profileRoutes = require('./routes/profile-routes')
 const passportSetup = require('./config/passport-setup')
-const port = process.env.PORT || 3000
+//const port = process.env.PORT || 3000
 
 //connect mongodb with mongoose
 
-mongoose.connect(keys.mongodb.dbURI, (req, res) => {
-    console.log('mongodb connected')
+mongoose.connect(keys.mongodb.dbURI, (err, database) => {
+     if (err) return console.log(err)
+ 	 db = database
+  	app.listen(process.env.PORT || 3000, () => {
+    console.log('listening on 3000 & mongodb connected')
+  })
 })
 
 app.use(cookieSession({
@@ -38,9 +42,9 @@ app.use(bodyParser.json())
 
 
 
-app.listen(port)
+// app.listen(port)
 
-console.log(`server listen port -> ${port}`)
+// console.log(`server listen port -> ${port}`)
 
 
 app.get('/', (req, res) => {
@@ -67,21 +71,7 @@ app.get('/logout', (req, res) => {
    res.redirect('/')
 })
 
-const authCheck = (req,res,next)=>{
-  if(!req.user){
-    // if user not login then redirect basrd on user details (req.user)
-    res.render('admin/login')
-  }else{
-    // if login go to progile page
-    next()
-  }
-}
 
-
-app.get('/dash',authCheck,(req,res)=>{
-  res.render('admin/dash',{user:req.user})
-  //res.send('user name is :' + req.user.username)
-})
 
 // app.get('/add-post',(req,res)=>{
 //   res.render('admin/addpost')
