@@ -62,20 +62,20 @@ router.get('/post/delete/:id', function(req, res){
 });
 
 router.get('/post/edit/:id',(req,res)=>{
-  db.collection('posts').find().toArray((err, result) => {
+  Posts.findOne({_id: req.params.id}).exec(function (err, posts)  {
     if (err) return console.log(err)
-    res.render('admin/editpost', {user:req.user,posts: result})
-    console.log(result)
+    res.render('admin/editpost', {user:req.user,posts: posts})
+    //console.log(posts)
   })
 })
 
-// router.get('/post/update/:id',(req,res)=>{
-//     Posts.findByIdAndUpdate({_id: req.params.id}, 
-//      function(err, docs){
-//     if(err) res.json(err);
-//     else    res.redirect("../list-post");
-//   });
-// })
+router.post('/post/update/:id',(req,res)=>{
+ Posts.findByIdAndUpdate(req.params.id, { $set: { post_title: req.body.post_title, post_tag: req.body.post_tag, post_content: req.body.post_content}}, { new: true }, function (err, posts) {
+    if (err) return console.log(err)
+    res.render('admin/editpost', {user:req.user,posts: posts})
+    //console.log(posts)
+  })
+})
 
 //
 router.get('/add-categories',(req,res,result)=>{

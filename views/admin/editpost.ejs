@@ -160,24 +160,24 @@
                 <div class="card">
                     <div class="header">
                         <h2>
-                                ADD POST <p><%= posts.post_title %></p>
+                                EDIT POST 
                             </h2>
                     </div>
                     <div class="body">
-                        <form method="post" action="">
-                            <label for="email_address">Post Title</label>
+                        <form method="post" action="/dash/post/update/<%= posts._id %>">
+                            <label for="email_address">Edit Title</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <p><%= posts.post_title %></p>
+                                    
                                     <input type="text" name="post_title" id="post_title" class="form-control" value="<%= posts.post_title %>">
                                 </div>
                             </div>
                             <div class="row clearfix">
                                 <div class="col-md-6">
-                                    <label for="password">Add Tag</label>
+                                    <label for="password">Edit Tag</label>
                                     <div class="form-group demo-tagsinput-area">
                                         <div class="form-line">
-                                            <input type="text" name="post_tag" class="form-control" data-role="tagsinput" value="">
+                                            <input type="text" name="post_tag" class="form-control" data-role="tagsinput" value="<%= posts.post_tag %>">
                                         </div>
                                     </div>
                                 </div>
@@ -185,8 +185,8 @@
                                     <div class="col-md-12">
 
                                         <div class="body">
-                                            <label for="password">Add Content</label>
-                                            <textarea id="ckeditor" name="post_content">
+                                            <label for="password">Edit Content</label>
+                                            <textarea id="ckeditor" name="post_content"><%= posts.post_content %>"
                                             </textarea>
                                         </div>
                                     </div>
