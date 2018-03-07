@@ -175,10 +175,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <% for(var i=0; i<posts.length; i++) {%>
                                     <tr>
                                         <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
+                                        <td><%= posts[i].post_title %></td>
+                                        <td><%= posts[i].post_categories %></td>
                                         <td>
                                         <a href='/users/edit/<%= %>'>Edit</a>
                                          <form action="/dash/delete/<%= %>" style="float:right">
@@ -186,7 +187,7 @@
                                          <input type="hidden" name="_method" value="DELETE" />
                                         </form></td>
                                     </tr>
-
+                                    <% } %>
                                 </tbody>
                             </table>
                         </div>

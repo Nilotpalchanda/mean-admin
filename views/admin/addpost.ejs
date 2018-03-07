@@ -164,18 +164,18 @@
                             </h2>
                     </div>
                     <div class="body">
-                        <form method="post" href="/dash/post/save">
+                        <form method="post" action="/dash/post/save">
                             <label for="email_address">Post Title</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="post_title" id="email_address" class="form-control" placeholder="Enter your email address">
+                                    <input type="text" name="post_title" id="post_title" class="form-control" placeholder="Enter your Post Title">
                                 </div>
                             </div>
                             <div class="row clearfix">
                                 <div class="col-md-6">
                                     <label for="password">Add Categories</label>
                                     <div class="form-group">
-                                        <select class="form-control show-tick" data-live-search="true">
+                                        <select name="post_categories" class="form-control show-tick" data-live-search="true">
                                             <% for(var i=0; i<categories.length; i++) {%>
                                                 <option>
                                                     <%= categories[i].categoriesname %>
@@ -188,11 +188,21 @@
                                     <label for="password">Add Tag</label>
                                     <div class="form-group demo-tagsinput-area">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" data-role="tagsinput" value="Amsterdam,Washington,Sydney,Beijing,Cairo">
+                                            <input type="text" name="post_tag" class="form-control" data-role="tagsinput" value="">
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <div class="row clearfix">
+                                    <div class="col-md-12">
+
+                                        <div class="body">
+                                            <label for="password">Add Content</label>
+                                            <textarea id="ckeditor" name="post_content">
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- #END# CKEditor -->
                             </div>
                             <button type="submit" class="btn btn-primary m-t-15 waves-effect">SAVE</button>
                         </form>
@@ -207,6 +217,9 @@
     <script src="https://gurayyarar.github.io/AdminBSBMaterialDesign/plugins/bootstrap/js/bootstrap.js"></script>
     <!-- Select Plugin Js -->
     <script src="https://gurayyarar.github.io/AdminBSBMaterialDesign/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+    <script src="https://gurayyarar.github.io/AdminBSBMaterialDesign/plugins/ckeditor/ckeditor.js"></script>
+    <script src="https://gurayyarar.github.io/AdminBSBMaterialDesign/plugins/tinymce/tinymce.js"></script>
+    <script src="https://gurayyarar.github.io/AdminBSBMaterialDesign/js/pages/forms/editors.js"></script>
     <!-- Bootstrap Tags Input Plugin Js -->
     <script src="https://gurayyarar.github.io/AdminBSBMaterialDesign/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
     <!-- Select Plugin Js -->

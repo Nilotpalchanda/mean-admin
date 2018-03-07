@@ -2,6 +2,7 @@ const router = require ('express').Router()
 var mongoose = require("mongoose");
 const mongo = require('mongodb')
 var Categories = require("../models/categories-model");
+const Posts = require("../models/post-model")
 const authCheck = (req,res,next)=>{
   if(!req.user){
     // if user not login then redirect basrd on user details (req.user)
@@ -23,11 +24,33 @@ router.get('/add-post',(req,res)=>{
     res.render('admin/addpost', {user:req.user,categories: result})
   })
 })
+
+router.post('/post/save',(req,res,)=>{
+var posts = new Posts(req.body);
+  posts.save(function(err,result) {
+    if(err) {
+      console.log(err);
+      res.render("admin/addpost",{user:req.user});
+    } else {
+      console.log("Successfully created an Categories.");
+      // res.redirect("/employees/show/"+employee._id);
+      console.log(result)
+      res.redirect("../add-post");
+      //res.redirect('/')
+    }
+  });
+})
 //List Posts
 
 router.get('/list-post',(req,res)=>{
-	res.render('admin/listpost',{user:req.user})
+	db.collection('posts').find().toArray((err, result) => {
+    if (err) return console.log(err)
+    res.render('admin/listpost', {user:req.user,posts: result})
+    //console.log(result)
+  })
 })
+
+
 //
 router.get('/add-categories',(req,res,result)=>{
     db.collection('categories').find().toArray((err, result) => {
