@@ -156,43 +156,48 @@
             <div class="row clearfix">
             </div>
             <!-- #END# Widgets -->
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                               ALL POSTS
-                                
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                                ADD POST <p><%= posts.post_title %></p>
                             </h2>
-                        </div>
-                        <div class="body table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>POST TITLE</th>
-                                        <th>POST CATEGORIES</th>
-                                        <th>ACTION</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <% for(var i=0; i<posts.length; i++) {%>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td><%= posts[i].post_title %></td>
-                                        <td><%= posts[i].post_categories %></td>
-                                        <td>
-                                        <a href='/dash/post/edit/<%= posts[i]._id %>'>Edit</a>
-                                         <form action="/dash/post/delete/<%= posts[i]._id %>" style="float:right">
-                                         <input type="submit" class="btn btn-danger waves-effect" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" />
-                                         <input type="hidden" name="_method" value="DELETE" />
-                                        </form></td>
-                                    </tr>
-                                    <% } %>
-                                </tbody>
-                            </table>
-                        </div>
+                    </div>
+                    <div class="body">
+                        <form method="post" action="">
+                            <label for="email_address">Post Title</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <p><%= posts.post_title %></p>
+                                    <input type="text" name="post_title" id="post_title" class="form-control" value="<%= posts.post_title %>">
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-md-6">
+                                    <label for="password">Add Tag</label>
+                                    <div class="form-group demo-tagsinput-area">
+                                        <div class="form-line">
+                                            <input type="text" name="post_tag" class="form-control" data-role="tagsinput" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-md-12">
+
+                                        <div class="body">
+                                            <label for="password">Add Content</label>
+                                            <textarea id="ckeditor" name="post_content">
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- #END# CKEditor -->
+                            </div>
+                            <button type="submit" class="btn btn-primary m-t-15 waves-effect">SAVE</button>
+                        </form>
                     </div>
                 </div>
+            </div>
         </div>
     </section>
     <!-- Jquery Core Js -->
@@ -201,6 +206,9 @@
     <script src="https://gurayyarar.github.io/AdminBSBMaterialDesign/plugins/bootstrap/js/bootstrap.js"></script>
     <!-- Select Plugin Js -->
     <script src="https://gurayyarar.github.io/AdminBSBMaterialDesign/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+    <script src="https://gurayyarar.github.io/AdminBSBMaterialDesign/plugins/ckeditor/ckeditor.js"></script>
+    <script src="https://gurayyarar.github.io/AdminBSBMaterialDesign/plugins/tinymce/tinymce.js"></script>
+    <script src="https://gurayyarar.github.io/AdminBSBMaterialDesign/js/pages/forms/editors.js"></script>
     <!-- Bootstrap Tags Input Plugin Js -->
     <script src="https://gurayyarar.github.io/AdminBSBMaterialDesign/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
     <!-- Select Plugin Js -->

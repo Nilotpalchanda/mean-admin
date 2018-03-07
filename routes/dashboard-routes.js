@@ -40,6 +40,8 @@ var posts = new Posts(req.body);
     }
   });
 })
+
+
 //List Posts
 
 router.get('/list-post',(req,res)=>{
@@ -50,6 +52,30 @@ router.get('/list-post',(req,res)=>{
   })
 })
 
+router.get('/post/delete/:id', function(req, res){
+  Posts.findByIdAndRemove({_id: req.params.id}, 
+     function(err, docs){
+     console.log(req.params.id)
+    if(err) res.json(err);
+    else    res.redirect("../list-post");
+  });
+});
+
+router.get('/post/edit/:id',(req,res)=>{
+  db.collection('posts').find().toArray((err, result) => {
+    if (err) return console.log(err)
+    res.render('admin/editpost', {user:req.user,posts: result})
+    console.log(result)
+  })
+})
+
+// router.get('/post/update/:id',(req,res)=>{
+//     Posts.findByIdAndUpdate({_id: req.params.id}, 
+//      function(err, docs){
+//     if(err) res.json(err);
+//     else    res.redirect("../list-post");
+//   });
+// })
 
 //
 router.get('/add-categories',(req,res,result)=>{
