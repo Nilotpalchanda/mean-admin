@@ -216,8 +216,14 @@
                                     <tr>
                                         
                                         <td><%= categories[i].categoriesname %></td>
-                                        <td><%= user.username  %></td>
-                                        <td><button type="submit" class="btn btn-danger waves-effect">Delete</button></td>
+                                        <td> <%= user.username  %> </td>
+                                        <td>
+                                        <form action="/dash/delete/<%= categories[i]._id %>" style="float:right">
+                                         <input type="submit" class="btn btn-danger waves-effect" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" />
+                                         <input type="hidden" name="_method" value="DELETE" />
+                                        </form>
+
+                                        </td>
                                     </tr>
                                     <% } %>
                                 </tbody>

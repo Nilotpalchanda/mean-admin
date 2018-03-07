@@ -18,9 +18,11 @@ router.get('/dashboard',authCheck,(req,res)=>{
 })
 
 router.get('/add-post',(req,res)=>{
-	res.render('admin/addpost',{user:req.user})
+      db.collection('categories').find().toArray((err, result) => {
+    if (err) return console.log(err)
+    res.render('admin/addpost', {user:req.user,categories: result})
+  })
 })
-
 //List Posts
 
 router.get('/list-post',(req,res)=>{
@@ -28,7 +30,7 @@ router.get('/list-post',(req,res)=>{
 })
 //
 router.get('/add-categories',(req,res,result)=>{
-	  db.collection('categories').find().toArray((err, result) => {
+    db.collection('categories').find().toArray((err, result) => {
     if (err) return console.log(err)
     res.render('admin/categories', {user:req.user,categories: result})
   })
@@ -54,4 +56,11 @@ var categories = new Categories(req.body);
   });
 })
 
+router.get('/delete/:id', function(req, res){
+  Categories.findByIdAndRemove({_id: req.params.id}, 
+     function(err, docs){
+    if(err) res.json(err);
+    else    res.redirect("../add-categories");
+  });
+});
 module.exports = router
