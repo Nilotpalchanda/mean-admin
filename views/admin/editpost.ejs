@@ -135,13 +135,14 @@
                                     <span>Add Categories</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="/dash/add-tags">
-                                    <span>Add Tags</span>
-                                </a>
-                            </li>
                         </ul>
                     </li>
+                                        <li>
+                    <a href="/dash/media-gallery" class="waves-effect waves-block">
+                            <i class="material-icons">perm_media</i>
+                            <span>Media Gallery</span>
+                    </a>
+                </li>
                 </ul>
             </div>
             <!-- #Menu -->
@@ -163,8 +164,10 @@
                                 EDIT POST 
                             </h2>
                     </div>
+
                     <div class="body">
-                        <form method="post" action="/dash/post/update/<%= posts._id %>">
+                        <img src="http://127.0.0.1:3000/uploads/<%= posts.Post_image %>" class="img-responsive">
+                        <form method="POST" enctype="multipart/form-data" action="/dash/post/update/<%= posts._id %>">
                             <label for="email_address">Edit Title</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -178,6 +181,14 @@
                                     <div class="form-group demo-tagsinput-area">
                                         <div class="form-line">
                                             <input type="text" name="post_tag" class="form-control" data-role="tagsinput" value="<%= posts.post_tag %>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="password">Edit Image</label>
+                                    <div class="form-group demo-tagsinput-area">
+                                        <div class="form-line">
+                                            <input type="file" name="post_imasge"/>
                                         </div>
                                     </div>
                                 </div>

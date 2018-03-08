@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const mongoose = require('mongoose')
 const passport = require('passport')
+const multer = require('multer')
 const cookieSession = require('cookie-session')
 const keys = require ('./config/keys')
 const authRoutes = require('./routes/auth-routes')
@@ -22,6 +23,9 @@ mongoose.connect(keys.mongodb.dbURI, (err, database) => {
   })
 })
 
+
+
+
 app.use(cookieSession({
 
     maxAge: 24 * 60 * 60 * 1000,
@@ -35,8 +39,12 @@ app.use(cookieSession({
 app.use(passport.initialize())
 app.use(passport.session())
 
+
 app.set('view engine', 'ejs')
+app.use(express.static('uploads'));
 app.set('views', path.join(__dirname, 'views'))
+
+app.use(express.static(path.join(__dirname, '/public/')));
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
@@ -70,6 +78,7 @@ app.get('/logout', (req, res) => {
    req.logout()
    res.redirect('/')
 })
+
 
 
 
